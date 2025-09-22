@@ -3,13 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Novela Web</title>
+  <title>NovelaNest - Tus Novelas Ligeras</title>
+  <link rel="stylesheet" href="/style.css">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <h1>Bienvenido al Sitio de Mi Novela</h1>
-  <p>Sitio en construcción. ¡Próximamente aquí encontrarás grandes historias!</p>
+  <header class="main-header">
+    <h1>NovelaNest</h1>
+    <nav>
+      <a href="#">Inicio</a>
+      <a href="#">Géneros</a>
+      <a href="/admin/">Publicar</a>
+    </nav>
+  </header>
 
-  <p><a href="/admin/">Acceder al panel de administrador</a></p>
+  <main class="container">
+    <h2>Últimas Novelas</h2>
+    <div class="novel-grid">
+      {%- for novel in collections.novelas %}
+      <div class="novel-card">
+        <img src="{{ novel.data.cover_image }}" alt="Portada de {{ novel.data.title }}">
+        <h3>{{ novel.data.title }}</h3>
+        <p>{{ novel.data.description }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </main>
 </body>
 </html>
