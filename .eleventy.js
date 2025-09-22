@@ -4,15 +4,17 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("style.css");
 
-  // ESTA ES LA PARTE NUEVA Y MÁS IMPORTANTE
   // Crea una colección llamada "novelas" a partir de todos los archivos
   // que tengan la etiqueta "novelas"
   eleventyConfig.addCollection("novelas", function(collectionApi) {
     return collectionApi.getFilteredByTag("novelas");
   });
 
+  // --- ESTA ES LA PARTE NUEVA Y CORREGIDA ---
+  // Le decimos a Eleventy que use el "idioma" Nunjucks para los archivos HTML.
   return {
-    // Directorios de entrada y salida
+    markdownTemplateEngine: "njk",
+    htmlTemplateEngine: "njk",
     dir: {
       input: ".",
       output: "_site"
