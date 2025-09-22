@@ -8,7 +8,7 @@ public_folder: "/assets/uploads"
 collections:
   - name: "novelas"
     label: "Novelas"
-    folder: "_novelas"
+    folder: "novelas"
     create: true
     slug: "{{slug}}"
     fields:
