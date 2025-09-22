@@ -47,7 +47,7 @@ Yuan Long se rió abiertamente. —Así que el gran prodigio es solo un pedazo d
 Yuan Chen retiró la mano de la piedra. No lloró ni mostró ira. Solo miró sus propios dedos, confundido.
 
 Los días que siguieron a la ceremonia fueron un infierno silencioso. Los sirvientes susurraban a sus espaldas. Los otros niños del clan lo evitaban o se burlaban de él. Sus tutores lo abandonaron, declarando que enseñar a alguien con los meridianos "completamente bloqueados e inertes" era una pérdida de tiempo. Solo su madre, la Dama Jiaying, lo trataba con el mismo amor incondicional.
-—A-Chen —le dijo una noche, mientras lo arropaba en su cama—. No importa si puedes cultivar o no. Puedes ser un erudito, un estratega, un artista. Tu valor no lo define la fuerza de tu puño. Eres mi hijo, y eso es todo lo que importa.
+—A-Chen —le dijo una noche, mientras lo arropaba en su cama—. No importa si puedes cultivar o no. Puedes ser un erudito, un estratega, un artista.  Tu valor no lo define la fuerza de tu puño. Eres mi hijo, y eso es todo lo que importa.
 Sus palabras eran un bálsamo, pero no resolvían el enigma en su interior.
 Esa noche, incapaz de dormir, se escabulló al jardín de lotos. La luna llena colgaba en el cielo como un disco de jade, su luz plateada bañando el estanque. Se sentó en la postura de meditación que había visto hacer a su padre mil veces y cerró los ojos.
 Los instructores siempre decían: "Siente el Qi del mundo a tu alrededor. Absórbelo en tus meridianos. Conviértelo en tu propio poder".
