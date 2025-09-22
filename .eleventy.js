@@ -1,8 +1,9 @@
 module.exports = function(eleventyConfig) {
-  // Copiar la carpeta de assets, admin y el CSS al sitio final
+  // Copiar carpetas y archivos necesarios al sitio final
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("style.css");
+  eleventyConfig.addPassthroughCopy("_includes"); // <-- ¡LÍNEA AÑADIDA!
 
   // Crea una colección llamada "novelas" a partir de todos los archivos
   // que tengan la etiqueta "novelas"
@@ -10,7 +11,6 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByTag("novelas");
   });
 
-  // --- ESTA ES LA PARTE MÁS IMPORTANTE A VERIFICAR ---
   // Le decimos a Eleventy que use el "idioma" Nunjucks para los archivos HTML.
   return {
     markdownTemplateEngine: "njk",
