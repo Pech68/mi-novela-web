@@ -8,11 +8,12 @@ public_folder: "/assets/uploads"
 collections:
   - name: "novelas"
     label: "Novelas"
-    folder: "novelas"
+    folder: "novelas" # Verificamos que no tenga guion bajo
     create: true
     slug: "{{slug}}"
     fields:
       - {label: "Título", name: "title", widget: "string"}
+      - {label: "Tags", name: "tags", widget: "hidden", default: "novelas"} # <-- ESTA ES LA LÍNEA NUEVA
       - {label: "Fecha de Publicación", name: "date", widget: "datetime"}
       - {label: "Imagen de Portada", name: "cover_image", widget: "image"}
       - {label: "Descripción Corta (Sinopsis)", name: "description", widget: "text"}
