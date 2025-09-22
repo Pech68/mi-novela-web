@@ -1,0 +1,19 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "novelas"
+    label: "Novelas"
+    folder: "_novelas"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Fecha de Publicación", name: "date", widget: "datetime"}
+      - {label: "Imagen de Portada", name: "cover_image", widget: "image"}
+      - {label: "Descripción Corta (Sinopsis)", name: "description", widget: "text"}
+      - {label: "Contenido/Capítulos", name: "body", widget: "markdown"}
