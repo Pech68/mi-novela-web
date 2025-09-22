@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="main-header">
+    <h1><a href="/">NovelaNest</a></h1>
+    <nav>
+      <a href="/">Inicio</a>
+      <a href="#">Géneros</a>
+      <a href="/admin/">Publicar</a>
+    </nav>
+  </header>
+
+  <main class="container novel-page">
+    <div class="novel-main-content">
+      <h1>{{ title }}</h1>
+      <div class="novel-body">
+        {{ content | safe }}
+      </div>
+    </div>
+    <aside class="novel-sidebar">
+      <div class="sidebar-widget">
+        <img src="{{ cover_image }}" alt="Portada de {{ title }}" class="sidebar-cover-image">
+        <h3>{{ title }}</h3>
+        <p>{{ description }}</p>
+      </div>
+
+      <div class="sidebar-widget donation-box">
+        <h3>APOYA AL AUTOR</h3>
+        <p>¡Ayúdame a seguir escribiendo! Tu apoyo es mi mayor motivación.</p>
+        <p class="nequi-number">Nequi: 31252521610</p>
+      </div>
+
+      <div class="sidebar-widget action-buttons">
+         <div class="like-dislike">
+            <button>👍 Like</button>
+            <button>👎 Dislike</button>
+         </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <section class="container comments-section">
+    <h2>Comentarios</h2>
+    <p>(Próximamente...)</p>
+  </section>
+
+</body>
+</html>
