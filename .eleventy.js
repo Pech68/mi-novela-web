@@ -10,7 +10,7 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByTag("novelas");
   });
 
-  // --- ESTA ES LA PARTE NUEVA Y CORREGIDA ---
+  // --- ESTA ES LA PARTE MÁS IMPORTANTE A VERIFICAR ---
   // Le decimos a Eleventy que use el "idioma" Nunjucks para los archivos HTML.
   return {
     markdownTemplateEngine: "njk",
