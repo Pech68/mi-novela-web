@@ -53,3 +53,64 @@ body {
   font-size: 0.9em;
   color: #666;
 }
+/* --- Estilos Página de Novela --- */
+.novel-page {
+  display: flex;
+  gap: 2rem;
+}
+.novel-main-content {
+  flex: 3; /* Ocupa 3/4 del espacio */
+}
+.novel-sidebar {
+  flex: 1; /* Ocupa 1/4 del espacio */
+}
+.novel-body {
+  line-height: 1.8;
+  font-size: 1.1em;
+}
+.novel-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.sidebar-widget {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+}
+.sidebar-cover-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.donation-box {
+  background-color: #eaf5ff;
+  text-align: center;
+}
+.nequi-number {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #3498db;
+}
+.like-dislike {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.like-dislike button {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  font-size: 1em;
+}
+.comments-section {
+  margin-top: 2rem;
+}
+.novel-card-link {
+  text-decoration: none;
+  color: inherit;
+}
