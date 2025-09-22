@@ -11,10 +11,11 @@ collections:
     folder: "novelas" # Verificamos que no tenga guion bajo
     create: true
     slug: "{{slug}}"
-    fields:
-      - {label: "Título", name: "title", widget: "string"}
-      - {label: "Tags", name: "tags", widget: "hidden", default: "novelas"} # <-- ESTA ES LA LÍNEA NUEVA
-      - {label: "Fecha de Publicación", name: "date", widget: "datetime"}
-      - {label: "Imagen de Portada", name: "cover_image", widget: "image"}
-      - {label: "Descripción Corta (Sinopsis)", name: "description", widget: "text"}
-      - {label: "Contenido/Capítulos", name: "body", widget: "markdown"}
+   fields:
+        - {label: "Título", name: "title", widget: "string"}
+        - {label: "Layout", name: "layout", widget: "hidden", default: "novel-layout.njk"} # <-- LÍNEA NUEVA
+        - {label: "Tags", name: "tags", widget: "hidden", default: "novelas"}
+        - {label: "Fecha de Publicación", name: "date", widget: "datetime"}
+        - {label: "Imagen de Portada", name: "cover_image", widget: "image"}
+        - {label: "Descripción Corta (Sinopsis)", name: "description", widget: "text"}
+        - {label: "Contenido/Capítulos", name: "body", widget: "markdown"}
