@@ -1,0 +1,42 @@
+---
+pagination:
+  data: collections.genresList
+  size: 1
+  alias: genre
+permalink: "/generos/{{ genre | slugify }}/"
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novelas de {{ genre }}</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="main-header">
+    <h1><a href="/">PechsNovel</a></h1>
+    <nav>
+      <a href="/">Inicio</a>
+      <a href="#">Géneros</a>
+      <a href="/admin/">Publicar</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2 class="page-title">Género: {{ genre }}</h2>
+    <div class="novel-grid">
+      {% for novel in collections.novel %}
+        {% if novel.data.genres and genre in novel.data.genres %}
+          <a href="{{ novel.url }}" class="novel-card-link">
+            <div class="novel-card">
+              <img src="{{ novel.data.cover_image }}" alt="Portada de {{ novel.data.title }}">
+              <h3>{{ novel.data.title }}</h3>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </main>
+</body>
+</html>
