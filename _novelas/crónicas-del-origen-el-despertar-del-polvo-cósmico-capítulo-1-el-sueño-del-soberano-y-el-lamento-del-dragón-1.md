@@ -1,6 +1,8 @@
 ---
 title: "Crónicas del Origen: El Despertar del Polvo Cósmico Capítulo 1: El Sueño
   del Soberano y el Lamento del Dragón"
+tags: novel
+layout: novel-hub-layout.njk
 date: 2025-09-22T21:31:09.080Z
 cover_image: /assets/uploads/gemini_generated_image_jfgpykjfgpykjfgp.png
 description: '"Crónicas del Origen: El Despertar del Polvo Cósmico" es una
