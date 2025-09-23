@@ -1,17 +1,19 @@
 module.exports = function(eleventyConfig) {
-  // Copiar carpetas y archivos necesarios al sitio final
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("style.css");
-  eleventyConfig.addPassthroughCopy("_includes"); // <-- ¡LÍNEA AÑADIDA!
+  eleventyConfig.addPassthroughCopy("_includes");
 
-  // Crea una colección llamada "novelas" a partir de todos los archivos
-  // que tengan la etiqueta "novelas"
-  eleventyConfig.addCollection("novelas", function(collectionApi) {
-    return collectionApi.getFilteredByTag("novelas");
+  // Crea una colección para NOVELAS
+  eleventyConfig.addCollection("novel", function(collectionApi) {
+    return collectionApi.getFilteredByTag("novel");
   });
 
-  // Le decimos a Eleventy que use el "idioma" Nunjucks para los archivos HTML.
+  // Crea una colección para CAPÍTULOS
+  eleventyConfig.addCollection("chapter", function(collectionApi) {
+    return collectionApi.getFilteredByTag("chapter");
+  });
+
   return {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
