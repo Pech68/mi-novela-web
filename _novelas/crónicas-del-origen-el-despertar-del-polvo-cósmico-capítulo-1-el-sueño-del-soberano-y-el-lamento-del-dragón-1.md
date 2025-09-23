@@ -1,17 +1,10 @@
 ---
-title: "Crónicas del Origen: El Despertar del Polvo Cósmico Capítulo 1: El Sueño
-  del Soberano y el Lamento del Dragón"
+title: "Crónicas del Origen: El Despertar del Polvo Cósmico Capítulo 1: El Sueño del Soberano y el Lamento del Dragón"
 tags: novel
 layout: novel-hub-layout.njk
-date: 2025-09-22T21:31:09.080Z
-cover_image: /assets/uploads/gemini_generated_image_jfgpykjfgpykjfgp.png
-description: '"Crónicas del Origen: El Despertar del Polvo Cósmico" es una
-  novela de fantasía que sigue a Yuan Chen, la encarnación mortal del
-  omnipotente Señor del Origen. Nacido en la poderosa familia Yuan sin talento
-  para la cultivación, es considerado un "lisiado espiritual". Sin embargo, un
-  encuentro cósmico revela que posee el "poder del Origen" latente en su
-  interior. La historia narra su viaje para despertar este universo interno,
-  enfrentando un camino arduo pero con un potencial ilimitado.'
+date: '2025-09-22T22:53:42.678Z'
+cover_image: /assets/uploads/gemini_generated_image_3fggvkfsgpvvkfpp.png
+description: '"Crónicas del Origen: El Despertar del Polvo Cósmico" es una novela de fantasía que sigue a Yuan Chen...'
 ---
 <!--StartFragment-->
 
