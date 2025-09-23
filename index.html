@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NovelaNest - Tus Novelas Ligeras</title>
   <link rel="stylesheet" href="/style.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2c3e50">
 </head>
 <body>
   <header class="main-header">
     <h1>NovelaNest</h1>
     <nav>
-      <a href="#">Inicio</a>
+      <a href="/">Inicio</a>
       <a href="#">Géneros</a>
       <a href="/admin/">Publicar</a>
     </nav>
@@ -29,5 +31,13 @@
       {%- endfor %}
     </div>
   </main>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script>
 </body>
 </html>
