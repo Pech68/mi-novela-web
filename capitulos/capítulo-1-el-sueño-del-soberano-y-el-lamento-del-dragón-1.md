@@ -4,11 +4,11 @@ title: "Capítulo 1: El Sueño del Soberano y el Lamento del Dragón"
 layout: chapter-layout.njk
 tags: chapter
 ---
-<!--StartFragment-->
-
 Antes del tiempo, no había concepto. Antes del espacio, no existía la distancia. Solo existía Él.
 
 El Señor del Origen.
+
+![](/assets/uploads/gemini_generated_image_jfgpykjfgpykjfgp.png)
 
 No nació de un caos primigenio ni fue forjado por una voluntad superior. Simplemente, era. Su conciencia era el tejido mismo de la existencia y la no existencia, un paradox infinito que contenía todos los posibles y los imposibles. Con un pensamiento, extendió el primer universo, como un artista que sopla tinta sobre un pergamino de seda blanca. Las galaxias florecieron como flores de loto de luz, y los agujeros negros giraban como profundos y silenciosos remolinos de su meditación.
 
@@ -23,8 +23,6 @@ Y así, tomó una decisión que haría temblar los cimientos de la realidad. Eli
 Con una fracción infinitesimal de su poder, tejió una copia perfecta de un cuerpo humano. No un simple avatar, sino una vasija de carne y hueso, con todas sus limitaciones y potencial. Selló su omnisciencia, sus memorias cósmicas, dejando solo un instinto latente, un eco de su verdadera naturaleza. Luego, ingresó su conciencia en esa forma, la redujo al estado más vulnerable y fundamental de la vida humana: un embrión.
 
 Y lo envió a nacer en el seno de la familia más poderosa del Imperio del Dragón Celestial, en la nación de Zhongguo. La familia Yuan.
-
-
 
 La Mansión del Clan Yuan en la capital imperial, Tianlong, era una ciudad en sí misma. Patios exquisitamente cuidados se conectaban por pasillos de madera de sándalo, techos curvos con tejas de jade verde se alzaban hacia el cielo, y el aire mismo vibraba con una densa y palpable energía espiritual, o Qi.
 
@@ -115,7 +113,3 @@ Se dio cuenta de la verdad. No estaba lisiado. No estaba vacío. El monolito no 
 Su camino era mucho más largo, mucho más arduo y con un potencial infinitamente mayor.
 
 Su camino era despertar el universo que llevaba dentro.
-
-
-
-<!--EndFragment-->
