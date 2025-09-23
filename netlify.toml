@@ -1,0 +1,7 @@
+# Redirige a los usuarios sin el rol de "admin" fuera del panel
+[[redirects]]
+  from = "/admin/*"
+  to = "/"
+  status = 401
+  force = true
+  conditions = {Role = ["!admin"]}
