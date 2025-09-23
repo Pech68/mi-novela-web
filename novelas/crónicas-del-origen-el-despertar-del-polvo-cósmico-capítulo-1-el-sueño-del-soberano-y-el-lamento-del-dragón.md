@@ -1,6 +1,5 @@
 ---
-title: "Crónicas del Origen: El Despertar del Polvo Cósmico Capítulo 1: El Sueño
-  del Soberano y el Lamento del Dragón"
+title: "Crónicas del Origen: El Despertar del Polvo Cósmico"
 author: Devinson Rodriguez
 cover_image: /assets/uploads/gemini_generated_image_jfgpykjfgpykjfgp.png
 description: >-
