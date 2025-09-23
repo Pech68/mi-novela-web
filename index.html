@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NovelaNest - Tus Novelas Ligeras</title>
   <link rel="stylesheet" href="/style.css">
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <header class="main-header">
@@ -20,12 +19,11 @@
   <main class="container">
     <h2>Últimas Novelas</h2>
     <div class="novel-grid">
-      {%- for novel in collections.novelas %}
+      {%- for novel in collections.novel %}
       <a href="{{ novel.url }}" class="novel-card-link">
         <div class="novel-card">
           <img src="{{ novel.data.cover_image }}" alt="Portada de {{ novel.data.title }}">
           <h3>{{ novel.data.title }}</h3>
-          <p>{{ novel.data.description }}</p>
         </div>
       </a>
       {%- endfor %}
