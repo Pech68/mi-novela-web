@@ -36,7 +36,14 @@
             <button>👍 Like</button>
             <button>👎 Dislike</button>
          </div>
-      </div>
+</div>
+
+  <div class="sidebar-widget share-box">
+    <h3>COMPARTIR</h3>
+    <a href="https://wa.me/?text={{ title | urlencode }}%20-%20{{ site.url }}{{ page.url }}" target="_blank" class="share-btn whatsapp">WhatsApp</a>
+    <a href="https://twitter.com/intent/tweet?text={{ title | urlencode }}&url={{ site.url }}{{ page.url }}" target="_blank" class="share-btn twitter">Twitter</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank" class="share-btn facebook">Facebook</a>
+  </div>
     </aside>
   </main>
   
