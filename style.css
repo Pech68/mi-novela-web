@@ -215,3 +215,29 @@ body {
     padding: 1rem;
   }
 }
+/* --- Estilos Botones de Compartir --- */
+.share-box {
+  text-align: center;
+}
+.share-btn {
+  display: block;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+.share-btn:hover {
+  opacity: 0.9;
+}
+.share-btn.whatsapp {
+  background-color: #25D366;
+}
+.share-btn.twitter {
+  background-color: #1DA1F2;
+}
+.share-btn.facebook {
+  background-color: #1877F2;
+}
