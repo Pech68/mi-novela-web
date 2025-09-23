@@ -241,3 +241,24 @@ body {
 .share-btn.facebook {
   background-color: #1877F2;
 }
+/* --- Estilos Navegación de Capítulos --- */
+.chapter-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  border-top: 1px solid #eee;
+  padding-top: 2rem;
+}
+.nav-btn {
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #e9ecef;
+  color: #333;
+  transition: background-color 0.2s, color 0.2s;
+}
+.nav-btn:hover {
+  background-color: #3498db;
+  color: white;
+}
