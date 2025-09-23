@@ -26,7 +26,12 @@
       <div class="novel-hub-info">
         <h1>{{ title }}</h1>
         <p><strong>Autor:</strong> {{ author }}</p>
-        <p><strong>Géneros:</strong> {{ genres }}</p>
+       <p><strong>Géneros:</strong> 
+  {% set genreList = genres.split(',') %}
+  {% for genre in genreList %}
+    <a href="/generos/{{ genre | trim | slugify }}/" class="genre-tag">{{ genre | trim }}</a>
+  {% endfor %}
+</p>
         <p><strong>Estado:</strong> {{ status }}</p>
         <div class="novel-hub-actions">
           <button class="action-btn primary">Añadir a la Biblioteca</button>
