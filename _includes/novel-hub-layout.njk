@@ -15,6 +15,7 @@
       <a href="/">Inicio</a>
       <a href="/generos/">Géneros</a>
       <a href="/admin/">Publicar</a>
+      <div id="auth-buttons"></div>
     </nav>
   </header>
 
@@ -26,15 +27,10 @@
       <div class="novel-hub-info">
         <h1>{{ title }}</h1>
         <p><strong>Autor:</strong> {{ author }}</p>
-       <p><strong>Géneros:</strong> 
-  {% set genreList = genres.split(',') %}
-  {% for genre in genreList %}
-    <a href="/generos/{{ genre | trim | slugify }}/" class="genre-tag">{{ genre | trim }}</a>
-  {% endfor %}
-</p>
+        <p><strong>Géneros:</strong> {{ genres }}</p>
         <p><strong>Estado:</strong> {{ status }}</p>
         <div class="novel-hub-actions">
-          <button class="action-btn primary">Añadir a la Biblioteca</button>
+          <button id="add-to-library-btn" class="action-btn primary" style="display: none;">Añadir a la Biblioteca</button>
           <button class="action-btn">Leer Primer Capítulo</button>
         </div>
       </div>
@@ -43,7 +39,6 @@
     <div class="novel-hub-content">
       <h2>Resumen</h2>
       <div>{{ description | safe }}</div>
-
       <h2>Lista de Capítulos</h2>
       <ul class="chapter-list">
         {% set novelSlug = page.fileSlug %}
@@ -58,13 +53,60 @@
       </ul>
     </div>
   </main>
-  
+
+  <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="/auth.js"></script>
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js');
-      });
-    }
+    document.addEventListener("DOMContentLoaded", function() {
+      const identity = window.netlifyIdentity;
+      const addToLibraryBtn = document.getElementById('add-to-library-btn');
+
+      function checkUser() {
+        const user = identity.currentUser();
+        if (user && addToLibraryBtn) {
+          addToLibraryBtn.style.display = 'inline-block'; // Muestra el botón si el usuario está logueado
+        } else if (addToLibraryBtn) {
+          addToLibraryBtn.style.display = 'none'; // Oculta el botón si no está logueado
+        }
+      }
+
+      checkUser(); // Revisa al cargar la página
+      identity.on('login', checkUser);
+      identity.on('logout', checkUser);
+
+      if (addToLibraryBtn) {
+        addToLibraryBtn.addEventListener('click', function() {
+          const user = identity.currentUser();
+          if (!user) {
+            alert('Por favor, inicia sesión para añadir esta novela a tu biblioteca.');
+            return;
+          }
+
+          const dataToSend = {
+            user_id: user.id,
+            novel_slug: '{{ page.fileSlug }}'
+          };
+
+          // Llamada a nuestra Netlify Function
+          fetch('/.netlify/functions/addToLibrary', {
+            method: 'POST',
+            body: JSON.stringify(dataToSend)
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.error) {
+              alert('Error: ' + data.error);
+            } else {
+              alert(data.message);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un error al conectar con el servidor.');
+          });
+        });
+      }
+    });
   </script>
 </body>
 </html>
