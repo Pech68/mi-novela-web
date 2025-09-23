@@ -1,6 +1,6 @@
 ---
 title: "Crónicas del Origen: El Despertar del Polvo Cósmico"
-author: Devinson R
+author: Devinson Rodriguez
 cover_image: /assets/uploads/gemini_generated_image_jfgpykjfgpykjfgp.png
 description: '"Crónicas del Origen: El Despertar del Polvo Cósmico" es una
   novela de fantasía que sigue a Yuan Chen, la encarnación mortal del
