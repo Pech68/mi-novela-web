@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale-1.0">
   <title>{{ title }}</title>
   <link rel="stylesheet" href="/style.css">
   <link rel="manifest" href="/manifest.json">
@@ -36,7 +36,7 @@
           <a href="{{ nextChapter.url }}" class="nav-btn next">Siguiente Capítulo →</a>
         {%- endif %}
       </nav>
-      </div>
+    </div>
     <aside class="novel-sidebar">
       <div class="sidebar-widget donation-box">
         <h3>APOYA AL AUTOR</h3>
@@ -61,9 +61,21 @@
   
   <section class="container comments-section">
     <h2>Comentarios</h2>
-    <p>(Próximamente...)</p>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = '{{ site.url }}{{ page.url }}';
+            this.page.identifier = '{{ page.url }}';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://pechsnovel.disqus.com/embed.js'; // Tu shortname ya está aquí
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Por favor, activa JavaScript para ver los <a href="https://disqus.com/?ref_noscript">comentarios potenciados por Disqus.</a></noscript>
   </section>
-
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
