@@ -1,10 +1,12 @@
 module.exports = function(eleventyConfig) {
+  // Copia todos los archivos y carpetas necesarios al sitio final
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("style.css");
   eleventyConfig.addPassthroughCopy("_includes");
   eleventyConfig.addPassthroughCopy("manifest.json");
   eleventyConfig.addPassthroughCopy("sw.js");
+  eleventyConfig.addPassthroughCopy("auth.js"); // <-- Línea añadida y verificada
 
   // Crea una colección para NOVELAS
   eleventyConfig.addCollection("novel", function(collectionApi) {
@@ -16,7 +18,7 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByTag("chapter");
   });
 
-  // --- CÓDIGO NUEVO PARA GÉNEROS ---
+  // Crea la lista de GÉNEROS
   eleventyConfig.addCollection("genresList", function(collectionApi) {
     const genresSet = new Set();
     collectionApi.getFilteredByTag("novel").forEach(item => {
@@ -30,9 +32,8 @@ module.exports = function(eleventyConfig) {
     });
     return [...genresSet].sort();
   });
-  // --- FIN DEL CÓDIGO NUEVO ---
 
-  // Helper para convertir texto a URL amigable (ej. "Ciencia Ficción" -> "ciencia-ficcion")
+  // Helper para convertir texto a URL amigable
   eleventyConfig.addFilter("slugify", function(str) {
     return str
       .toLowerCase()
@@ -41,6 +42,7 @@ module.exports = function(eleventyConfig) {
       .replace(/^-+|-+$/g, '');
   });
 
+  // Configuración de plantillas
   return {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
