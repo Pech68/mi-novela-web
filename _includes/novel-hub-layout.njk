@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="main-header">
+    <h1><a href="/">NovelaNest</a></h1>
+    <nav>
+      <a href="/">Inicio</a>
+      <a href="#">Géneros</a>
+      <a href="/admin/">Publicar</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="novel-hub-header">
+      <div class="novel-hub-cover">
+        <img src="{{ cover_image }}" alt="Portada de {{ title }}">
+      </div>
+      <div class="novel-hub-info">
+        <h1>{{ title }}</h1>
+        <p><strong>Autor:</strong> {{ author }}</p>
+        <p><strong>Géneros:</strong> {{ genres }}</p>
+        <p><strong>Estado:</strong> {{ status }}</p>
+        <div class="novel-hub-actions">
+          <button class="action-btn primary">Añadir a la Biblioteca</button>
+          <button class="action-btn">Leer Primer Capítulo</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="novel-hub-content">
+      <h2>Resumen</h2>
+      {{ description | safe }}
+
+      <h2>Lista de Capítulos</h2>
+      <ul class="chapter-list">
+        {% set novelSlug = page.fileSlug %}
+        {% set chaptersForThisNovel = collections.chapter | reverse %}
+        {% for chapter in chaptersForThisNovel %}
+          {% if chapter.data.novel == novelSlug %}
+            <li>
+              <a href="{{ chapter.url }}">{{ chapter.data.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </main>
+</body>
+</html>
