@@ -1,0 +1,17 @@
+---
+title: Todos los Géneros
+layout: chapter-layout.njk
+---
+
+<h1>Todos los Géneros</h1>
+<p>Explora todas las novelas clasificadas por su género.</p>
+
+<ul class="genre-directory-list">
+{% for genre in collections.genresList %}
+  <li>
+    <a href="/generos/{{ genre | slugify }}/">
+      {{ genre }}
+    </a>
+  </li>
+{% endfor %}
+</ul>
