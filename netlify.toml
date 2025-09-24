@@ -1,0 +1,14 @@
+# Regla 1: Permite el acceso a los administradores.
+# Esta regla debe ir PRIMERO.
+[[redirects]]
+  from = "/admin/*"
+  status = 200
+  force = true
+  conditions = {Role = ["admin"]}
+
+# Regla 2: Bloquea a todos los demás y los envía a la página de inicio.
+[[redirects]]
+  from = "/admin/*"
+  to = "/"
+  status = 401 # Código para "No Autorizado"
+  force = true
