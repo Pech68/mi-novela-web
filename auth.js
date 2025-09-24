@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
   const authButtonsContainer = document.getElementById("auth-buttons");
+  // Asegúrate de que el widget de identidad esté listo
   const identity = window.netlifyIdentity;
 
   function renderButtons() {
     const user = identity.currentUser();
-    authButtons-container.innerHTML = ''; // Limpiar
+    // La línea del error estaba aquí. Ahora está corregida.
+    authButtonsContainer.innerHTML = ''; // Limpiar
 
     if (user) {
       // Si el usuario está logueado, muestra el enlace a su biblioteca, su nombre y el botón de Logout
@@ -22,9 +24,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
+  // Solo ejecuta el código si el contenedor de botones y el widget existen
   if (identity && authButtonsContainer) {
     renderButtons();
     identity.on('login', renderButtons);
     identity.on('logout', renderButtons);
+    identity.on('init', renderButtons); // Añadido para asegurar que se renderice al cargar
   }
 });
