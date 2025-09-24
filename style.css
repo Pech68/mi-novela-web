@@ -5,11 +5,11 @@
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
-  background-color: #12181b; /* Fondo principal oscuro azulado */
-  color: #e0e0e0; /* Texto principal claro */
+  background-color: #12181b;
+  color: #e0e0e0;
 }
 .main-header {
-  background-color: #1e272e; /* Un poco más claro que el fondo */
+  background-color: #1e272e;
   color: white;
   padding: 0 2rem;
   display: flex;
@@ -28,13 +28,45 @@ body {
   transition: color 0.2s;
 }
 .main-header a:hover {
-  color: #00a8ff; /* Azul vibrante para acentos */
+  color: #00a8ff;
 }
 .container {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 0 2rem;
 }
+
+/* --- Estilos de Botones Globales --- */
+.action-btn, .nav-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
+  display: inline-block;
+  text-align: center;
+}
+.action-btn.primary, .nav-publish-btn {
+  background-color: #00a8ff;
+  color: white;
+}
+.action-btn.primary:hover, .nav-publish-btn:hover {
+  background-color: #0095e0;
+  transform: scale(1.05);
+  color: white !important;
+}
+.nav-btn {
+  background-color: #333;
+  color: #eee;
+}
+.nav-btn:hover {
+  background-color: #00a8ff;
+  color: white;
+}
+
 
 /* --- Estilos Página Principal --- */
 .novel-grid {
@@ -89,23 +121,11 @@ body {
   font-size: 2.5em;
   color: #fff;
 }
-.action-btn {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 10px;
-  font-size: 1em;
-  font-weight: 600;
-  transition: background-color 0.2s, transform 0.2s;
-}
-.action-btn.primary {
-  background-color: #00a8ff;
-  color: white;
-}
-.action-btn.primary:hover {
-  background-color: #0095e0;
-  transform: scale(1.05);
+.novel-hub-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 .chapter-list {
   list-style: none;
@@ -140,10 +160,10 @@ body {
   padding: 1.5rem;
 }
 .novel-body {
-  font-family: 'Lora', serif; /* Tipografía para lectura */
+  font-family: 'Lora', serif;
   line-height: 1.9;
   font-size: 1.15em;
-  max-width: 70ch; /* Óptimo para lectura */
+  max-width: 70ch;
   color: #ccc;
 }
 .novel-body img {
@@ -187,15 +207,11 @@ body {
 /* --- Estilos Navegación de Capítulos y Menú --- */
 .main-nav { display: flex; justify-content: space-between; align-items: center; width: 100%; }
 .nav-group-left, .nav-group-right { display: flex; align-items: center; gap: 25px; }
-.nav-publish-btn { background-color: #00a8ff; padding: 8px 15px; border-radius: 5px; font-weight: bold; }
-.nav-publish-btn:hover { background-color: #0095e0; color: white !important; }
 #auth-buttons { display: flex; align-items: center; gap: 10px; }
 .auth-btn { padding: 8px 15px; border: 1px solid white; border-radius: 5px; background-color: transparent; color: white; text-decoration: none; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
 .auth-btn.primary, .auth-btn:hover { background-color: white; color: #1e272e; }
 .user-email { font-weight: bold; margin-right: 5px; }
 .chapter-navigation { display: flex; justify-content: space-between; margin-top: 2rem; border-top: 1px solid #333; padding-top: 2rem; }
-.nav-btn { padding: 12px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; background-color: #333; color: #eee; transition: background-color 0.2s, color 0.2s; }
-.nav-btn:hover { background-color: #00a8ff; color: white; }
 
 /* --- Estilos Páginas de Género --- */
 .page-title { border-bottom: 2px solid #00a8ff; padding-bottom: 10px; margin-bottom: 2rem; }
@@ -214,18 +230,27 @@ body {
 .share-btn.facebook { background-color: #1877F2; }
 
 /* --- REGLAS PARA CELULARES (DISEÑO ADAPTABLE) --- */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .container { padding: 0 1rem; margin: 1rem auto; }
   .novel-hub-header { flex-direction: column; }
   .novel-page { flex-direction: column; }
   .main-header {
-    flex-direction: column;
     height: auto;
-    gap: 1.5rem;
     padding: 1rem;
   }
   .main-nav {
     flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .nav-group-left, .nav-group-right {
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
+  }
+  #auth-buttons {
+    order: -1;
+    width: 100%;
+    justify-content: center;
   }
 }
