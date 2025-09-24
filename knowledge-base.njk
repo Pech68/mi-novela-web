@@ -8,12 +8,15 @@ permalink: "/lore/{{ novel.fileSlug }}.json"
 {
   "title": {{ novel.data.title | dump | safe }},
   "author": {{ novel.data.author | dump | safe }},
-  "content": [
+  "chapters": [
     {%- set novelSlug = novel.fileSlug %}
-    {# Usamos nuestro nuevo filtro, que es más limpio y funciona #}
     {%- set chaptersForThisNovel = collections.chapter | filterByNovel(novelSlug) | sort(false, false, 'fileSlug') %}
     {%- for chapter in chaptersForThisNovel %}
-      {{- chapter.templateContent | dump | safe -}}{%- if not loop.last %},{% endif %}
+      {
+        "title": {{ chapter.data.title | dump | safe }},
+        "content": {{ chapter.templateContent | dump | safe }}
+      }
+      {%- if not loop.last %},{% endif %}
     {%- endfor %}
   ]
 }
