@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (hamburgerBtn && mobileNav) {
     hamburgerBtn.addEventListener('click', () => {
       mobileNav.classList.toggle('active');
+      hamburgerBtn.classList.toggle('active');
     });
   }
 });
