@@ -421,3 +421,29 @@ body {
     color: #00a8ff;
     font-weight: bold;
 }
+/* --- REGLAS DEFINITIVAS PARA CELULARES --- */
+@media (max-width: 800px) {
+    .main-header {
+        flex-direction: column; /* Apila el logo y el menú */
+        height: auto;           /* Permite que la altura crezca si es necesario */
+        padding: 1rem;
+    }
+
+    .main-nav {
+        flex-direction: column; /* Apila los grupos de enlaces */
+        width: 100%;
+        margin-top: 1rem;
+        gap: 1rem;
+    }
+
+    .nav-group-left,
+    .nav-group-right {
+        flex-direction: column; /* Apila los enlaces dentro de cada grupo */
+        align-items: center;
+        gap: 1rem;
+    }
+
+    #auth-buttons {
+        order: -1; /* Mueve la sección de usuario/login al principio en el móvil */
+    }
+}
