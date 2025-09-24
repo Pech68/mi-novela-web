@@ -229,40 +229,7 @@ body {
 .share-btn.twitter { background-color: #1DA1F2; }
 .share-btn.facebook { background-color: #1877F2; }
 
-/* --- REGLAS PARA CELULARES (DISEÑO ADAPTABLE) v3.0 --- */
-@media (max-width: 900px) {
-  .main-header {
-    height: auto;
-    padding: 1rem;
-  }
-  .main-nav {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-  .nav-group-left, .nav-group-right {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    width: 100%;
-  }
-  #auth-buttons {
-    order: -1; /* Pone los botones de login/usuario primero */
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  .user-email {
-    order: -1;
-  }
-  .novel-hub-header, .novel-page {
-    flex-direction: column;
-  }
-  .container {
-      padding: 0 1rem;
-      margin: 1rem auto;
-  }
-}
+
 /* --- Estilos Chatbot de Lore --- */
 #lore-chatbot-container {
   position: fixed;
@@ -421,29 +388,62 @@ body {
     color: #00a8ff;
     font-weight: bold;
 }
-/* --- REGLAS DEFINITIVAS PARA CELULARES --- */
-@media (max-width: 800px) {
-    .main-header {
-        flex-direction: column; /* Apila el logo y el menú */
-        height: auto;           /* Permite que la altura crezca si es necesario */
-        padding: 1rem;
-    }
+/* --- REGLAS DEFINITIVAS PARA CELULARES Y MENÚ HAMBURGUESA --- */
+@media (max-width: 900px) {
+  /* Oculta el menú de navegación normal en pantallas pequeñas */
+  .main-nav {
+    display: none;
+  }
 
-    .main-nav {
-        flex-direction: column; /* Apila los grupos de enlaces */
-        width: 100%;
-        margin-top: 1rem;
-        gap: 1rem;
-    }
+  /* Muestra el botón de la hamburguesa */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+  }
+  .hamburger span {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+  }
 
-    .nav-group-left,
-    .nav-group-right {
-        flex-direction: column; /* Apila los enlaces dentro de cada grupo */
-        align-items: center;
-        gap: 1rem;
-    }
+  /* Muestra el menú como un bloque desplegable cuando tiene la clase 'active' */
+  .main-nav.active {
+    display: flex;
+    position: absolute;
+    top: 70px; /* Justo debajo del header */
+    left: 0;
+    width: 100%;
+    background-color: #1e272e;
+    flex-direction: column;
+    padding: 2rem 0;
+    border-top: 1px solid #333;
+    z-index: 1000;
+  }
+  
+  /* Apila los elementos del menú verticalmente */
+  .nav-group-left, .nav-group-right {
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  #auth-buttons {
+    flex-direction: column;
+    gap: 1.5rem;
+    order: -1; /* Mueve los botones de login/usuario al principio */
+  }
 
-    #auth-buttons {
-        order: -1; /* Mueve la sección de usuario/login al principio en el móvil */
-    }
+  /* Otros ajustes generales para móviles */
+  .container { padding: 0 1rem; margin: 1rem auto; }
+  .novel-hub-header, .novel-page { flex-direction: column; }
+  .main-header { padding: 0 1.5rem; }
 }
