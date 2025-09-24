@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function renderButtons() {
     const user = identity.currentUser();
-    const navElement = document.querySelector(".main-header nav");
-    authButtonsContainer.innerHTML = ''; // Limpiar botones existentes
+    authButtons-container.innerHTML = ''; // Limpiar
 
     if (user) {
-      // Si el usuario está logueado, muestra su nombre y el botón de Logout
+      // Si el usuario está logueado, muestra el enlace a su biblioteca, su nombre y el botón de Logout
       authButtonsContainer.innerHTML = `
+        <a href="/biblioteca/" class="auth-btn">Mi Biblioteca</a>
         <span class="user-email">${user.email.split('@')[0]}</span>
         <a href="#" onclick="event.preventDefault(); netlifyIdentity.logout();" class="auth-btn">Logout</a>
       `;
