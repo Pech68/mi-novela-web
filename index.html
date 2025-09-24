@@ -1,62 +1,103 @@
-module.exports = function(eleventyConfig) {
-  // Copia todos los archivos y carpetas necesarios al sitio final
-  eleventyConfig.addPassthroughCopy("assets");
-  eleventyConfig.addPassthroughCopy("admin");
-  eleventyConfig.addPassthroughCopy("style.css");
-  eleventyConfig.addPassthroughCopy("_includes");
-  eleventyConfig.addPassthroughCopy("manifest.json");
-  eleventyConfig.addPassthroughCopy("sw.js");
-  eleventyConfig.addPassthroughCopy("auth.js");
-  eleventyConfig.addPassthroughCopy("chatbot.js");
-  eleventyConfig.addPassthroughCopy("nav.js"); // <-- LÍNEA AÑADIDA
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PechsNovel - Tus Novelas Ligeras</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2c3e50">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <header class="main-header">
+    <h1>PechsNovel</h1>
+    <nav class="main-nav">
+      <div class="nav-group-left">
+        <a href="/">Inicio</a>
+        <a href="/generos/">Géneros</a>
+      </div>
+      <div class="nav-group-right">
+        <div id="auth-buttons"></div>
+        <a href="/admin/" class="nav-publish-btn">Publicar</a>
+      </div>
+    </nav>
+  </header>
 
-  // Crea una colección para NOVELAS
-  eleventyConfig.addCollection("novel", function(collectionApi) {
-    return collectionApi.getFilteredByTag("novel");
-  });
+  <main class="container">
+    <section class="story-finder-section">
+      <h2>El Bibliotecario</h2>
+      <p>¿No sabes qué leer? Describe la trama que buscas o haz una pregunta sobre las novelas y nuestra IA te guiará.</p>
+      <div class="finder-input-container">
+        <input type="text" id="story-finder-input" placeholder="Ej: Busco una novela de fantasía con un protagonista poderoso...">
+        <button id="story-finder-btn">Preguntar</button>
+      </div>
+      <div id="story-finder-response"></div>
+    </section>
+    <h2>Últimas Novelas</h2>
+    <div class="novel-grid">
+      {%- for novel in collections.novel %}
+      <a href="{{ novel.url }}" class="novel-card-link">
+        <div class="novel-card">
+          <img src="{{ novel.data.cover_image }}" alt="Portada de {{ novel.data.title }}">
+          <h3>{{ novel.data.title }}</h3>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </main>
 
-  // Crea una colección para CAPÍTULOS
-  eleventyConfig.addCollection("chapter", function(collectionApi) {
-    return collectionApi.getFilteredByTag("chapter");
-  });
-
-  // Crea la lista de GÉNEROS
-  eleventyConfig.addCollection("genresList", function(collectionApi) {
-    const genresSet = new Set();
-    collectionApi.getFilteredByTag("novel").forEach(item => {
-      if ("genres" in item.data) {
-        let genres = item.data.genres;
-        if (typeof genres === "string") {
-          genres = genres.split(",").map(item => item.trim());
-        }
-        genres.forEach(genre => genresSet.add(genre));
-      }
-    });
-    return [...genresSet].sort();
-  });
-
-  // Helper para convertir texto a URL amigable
-  eleventyConfig.addFilter("slugify", function(str) {
-    return str
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/[\s_-]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-  });
-  
-  // Filtro para agrupar capítulos por novela
-  eleventyConfig.addFilter("filterByNovel", function(chapters, novelSlug) {
-    if (!novelSlug) return [];
-    return chapters.filter(chapter => chapter.data.novel === novelSlug);
-  });
-
-  // Configuración de plantillas
-  return {
-    markdownTemplateEngine: "njk",
-    htmlTemplateEngine: "njk",
-    dir: {
-      input: ".",
-      output: "_site"
+  <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="/auth.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
     }
-  };
-};
+  </script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const finderInput = document.getElementById('story-finder-input');
+      const finderBtn = document.getElementById('story-finder-btn');
+      const finderResponse = document.getElementById('story-finder-response');
+
+      const askLibrarian = async () => {
+        const question = finderInput.value.trim();
+        if (question === '') return;
+
+        finderResponse.innerHTML = '<p class="loading-message">El Bibliotecario está buscando en los estantes...</p>';
+        finderBtn.disabled = true;
+
+        try {
+          const response = await fetch('/.netlify/functions/recommendation-bot', {
+            method: 'POST',
+            body: JSON.stringify({ question: question })
+          });
+          
+          const data = await response.json();
+
+          if (data.error) {
+            finderResponse.innerHTML = `<p class="error-message">Error: ${data.error}</p>`;
+          } else {
+            finderResponse.innerHTML = marked.parse(data.answer); // Convierte la respuesta a HTML
+          }
+
+        } catch (err) {
+          finderResponse.innerHTML = '<p class="error-message">Lo siento, hubo un error de conexión con El Bibliotecario.</p>';
+        } finally {
+          finderBtn.disabled = false;
+        }
+      };
+
+      finderBtn.addEventListener('click', askLibrarian);
+      finderInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          askLibrarian();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
