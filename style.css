@@ -229,28 +229,37 @@ body {
 .share-btn.twitter { background-color: #1DA1F2; }
 .share-btn.facebook { background-color: #1877F2; }
 
-/* --- REGLAS PARA CELULARES (DISEÑO ADAPTABLE) --- */
-@media (max-width: 850px) {
-  .container { padding: 0 1rem; margin: 1rem auto; }
-  .novel-hub-header { flex-direction: column; }
-  .novel-page { flex-direction: column; }
+/* --- REGLAS PARA CELULARES (DISEÑO ADAPTABLE) v3.0 --- */
+@media (max-width: 900px) {
   .main-header {
     height: auto;
     padding: 1rem;
   }
   .main-nav {
     flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .nav-group-left, .nav-group-right {
+    flex-direction: column;
+    align-items: center;
     gap: 1.5rem;
     width: 100%;
   }
-  .nav-group-left, .nav-group-right {
-    flex-wrap: wrap;
-    justify-content: center;
+  #auth-buttons {
+    order: -1; /* Pone los botones de login/usuario primero */
+    flex-direction: column;
+    align-items: center;
     gap: 1rem;
   }
-  #auth-buttons {
+  .user-email {
     order: -1;
-    width: 100%;
-    justify-content: center;
+  }
+  .novel-hub-header, .novel-page {
+    flex-direction: column;
+  }
+  .container {
+      padding: 0 1rem;
+      margin: 1rem auto;
   }
 }
