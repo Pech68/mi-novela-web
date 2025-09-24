@@ -51,7 +51,7 @@ body {
 }
 .novel-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 30px rgba(0, 168, 255, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 168, 255, 0.15);
 }
 .novel-card img {
   width: 100%;
@@ -218,6 +218,14 @@ body {
   .container { padding: 0 1rem; margin: 1rem auto; }
   .novel-hub-header { flex-direction: column; }
   .novel-page { flex-direction: column; }
-  .main-header { flex-direction: column; height: auto; gap: 1rem; padding: 1rem; }
-  .main-nav { flex-direction: column; gap: 1rem; }
+  .main-header {
+    flex-direction: column;
+    height: auto;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  .main-nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
