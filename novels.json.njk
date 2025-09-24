@@ -1,0 +1,14 @@
+---
+permalink: /novels.json
+---
+[
+  {%- for novel in collections.novel %}
+  {
+    "title": "{{ novel.data.title }}",
+    "url": "{{ novel.url }}",
+    "slug": "{{ novel.fileSlug }}",
+    "cover_image": "{{ novel.data.cover_image }}"
+  }
+  {%- if not loop.last %},{% endif %}
+  {%- endfor %}
+]
