@@ -367,3 +367,57 @@ body {
   padding: 0 20px;
   cursor: pointer;
 }
+/* --- Estilos Buscador de Historias --- */
+.story-finder-section {
+  background-color: #1e272e;
+  border: 1px solid #333;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.story-finder-section h2 {
+  margin-top: 0;
+  font-size: 1.8em;
+  color: #00a8ff;
+}
+.finder-input-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+#story-finder-input {
+  flex-grow: 1;
+  padding: 15px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #12181b;
+  color: #eee;
+  font-size: 1em;
+}
+#story-finder-btn {
+  padding: 0 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: #00a8ff;
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+#story-finder-btn:hover {
+  background-color: #0095e0;
+}
+#story-finder-response {
+  margin-top: 1.5rem;
+  text-align: left;
+  background-color: #12181b;
+  padding: 1.5rem;
+  border-radius: 5px;
+  min-height: 50px;
+}
+#story-finder-response a {
+    color: #00a8ff;
+    font-weight: bold;
+}
