@@ -7,6 +7,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("manifest.json");
   eleventyConfig.addPassthroughCopy("sw.js");
   eleventyConfig.addPassthroughCopy("auth.js");
+  eleventyConfig.addPassthroughCopy("chatbot.js"); // <-- LÍNEA AÑADIDA
 
   // Crea una colección para NOVELAS
   eleventyConfig.addCollection("novel", function(collectionApi) {
@@ -42,13 +43,11 @@ module.exports = function(eleventyConfig) {
       .replace(/^-+|-+$/g, '');
   });
   
-  // --- FILTRO AÑADIDO ---
-  // Le enseñamos a Eleventy a filtrar capítulos por el slug de la novela
+  // Filtro para agrupar capítulos por novela
   eleventyConfig.addFilter("filterByNovel", function(chapters, novelSlug) {
     if (!novelSlug) return [];
     return chapters.filter(chapter => chapter.data.novel === novelSlug);
   });
-  // --- FIN DEL FILTRO ---
 
   // Configuración de plantillas
   return {
