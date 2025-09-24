@@ -7,7 +7,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("manifest.json");
   eleventyConfig.addPassthroughCopy("sw.js");
   eleventyConfig.addPassthroughCopy("auth.js");
-  eleventyConfig.addPassthroughCopy("chatbot.js"); // <-- LÍNEA AÑADIDA
+  eleventyConfig.addPassthroughCopy("chatbot.js");
+  eleventyConfig.addPassthroughCopy("nav.js"); // <-- LÍNEA AÑADIDA
 
   // Crea una colección para NOVELAS
   eleventyConfig.addCollection("novel", function(collectionApi) {
