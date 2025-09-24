@@ -447,3 +447,43 @@ body {
   .novel-hub-header, .novel-page { flex-direction: column; }
   .main-header { padding: 0 1.5rem; }
 }
+/* --- REGLAS PARA CELULARES (DISEÑO ADAPTABLE) vFINAL --- */
+@media (max-width: 900px) {
+  /* --- REGLA AÑADIDA PARA EL BIBLIOTECARIO --- */
+  .finder-input-container {
+    flex-direction: column; /* Apila el campo de texto y el botón */
+  }
+
+  /* --- (El resto de reglas que ya tenías) --- */
+  .hamburger {
+    display: flex;
+  }
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #1e272e;
+    flex-direction: column;
+    padding: 2rem 0;
+    border-top: 1px solid #333;
+    z-index: 1000;
+  }
+  .main-nav.active {
+    display: flex;
+  }
+  .nav-group-left, .nav-group-right {
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  #auth-buttons {
+    flex-direction: column;
+    gap: 1.5rem;
+    order: -1;
+  }
+  .container { padding: 0 1rem; margin: 1rem auto; }
+  .novel-hub-header, .novel-page { flex-direction: column; }
+  .main-header { padding: 0 1.5rem; }
+}
