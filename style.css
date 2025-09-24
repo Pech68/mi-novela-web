@@ -17,12 +17,18 @@ body {
   align-items: center;
   border-bottom: 1px solid #333;
   height: 70px;
-  position: relative;
 }
-.main-header h1 a {
+.main-header h1 {
+  margin: 0;
+  font-weight: 600;
+}
+.main-header a {
   color: white;
   text-decoration: none;
-  font-weight: 600;
+  transition: color 0.2s;
+}
+.main-header a:hover {
+  color: #00a8ff;
 }
 .container {
   max-width: 1200px;
@@ -60,6 +66,7 @@ body {
   background-color: #00a8ff;
   color: white;
 }
+
 
 /* --- Estilos Página Principal --- */
 .novel-grid {
@@ -222,78 +229,195 @@ body {
 .share-btn.twitter { background-color: #1DA1F2; }
 .share-btn.facebook { background-color: #1877F2; }
 
-/* --- Estilos Chatbot y Bibliotecario --- */
-.story-finder-section { background-color: #1e272e; border: 1px solid #333; padding: 1.5rem 2rem; border-radius: 8px; margin-bottom: 3rem; transition: all 0.3s ease; }
-.story-finder-section h2 { margin: 0; font-size: 1.8em; color: #00a8ff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-.story-finder-section h2 span { font-size: 0.8em; transition: transform 0.3s ease; }
-.story-finder-section.collapsed .finder-content { display: none; }
-.story-finder-section:not(.collapsed) h2 span { transform: rotate(90deg); }
-.finder-content { margin-top: 1.5rem; }
-.finder-input-container { display: flex; gap: 10px; }
-#story-finder-input { flex-grow: 1; padding: 15px; border: 1px solid #555; border-radius: 5px; background-color: #12181b; color: #eee; font-size: 1em; }
-#story-finder-btn { padding: 0 25px; border: none; border-radius: 5px; background-color: #00a8ff; color: white; font-size: 1em; font-weight: bold; cursor: pointer; }
-#story-finder-response { margin-top: 1.5rem; text-align: left; background-color: #12181b; padding: 1.5rem; border-radius: 5px; min-height: 50px; }
-#lore-chatbot-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-#open-chatbot-btn { background-color: #00a8ff; color: white; border: none; border-radius: 50%; width: 60px; height: 60px; box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4); cursor: pointer; display: flex; justify-content: center; align-items: center; }
-#chatbot-window { width: 350px; max-height: 500px; background-color: #1e272e; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); display: none; flex-direction: column; overflow: hidden; border: 1px solid #333; }
-#chatbot-window:not(.hidden) { display: flex; }
-#open-chatbot-btn.hidden { display: none; }
-#chatbot-header { background-color: #333; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; color: white; }
-#chatbot-messages { flex-grow: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-.message { padding: 10px 15px; border-radius: 15px; max-width: 80%; line-height: 1.4; }
-.message.user { background-color: #00a8ff; color: white; align-self: flex-end; }
-.message.bot { background-color: #333; color: #eee; align-self: flex-start; }
-#chatbot-input-container { display: flex; border-top: 1px solid #333; }
-#chatbot-input { flex-grow: 1; border: none; padding: 15px; background-color: #12181b; color: white; }
-#send-chatbot-btn { background-color: #00a8ff; border: none; color: white; padding: 0 20px; cursor: pointer; }
-
-/* --- REGLAS PARA CELULARES (DISEÑO ADAPTABLE) v4.0 --- */
+/* --- REGLAS PARA CELULARES (DISEÑO ADAPTABLE) v3.0 --- */
 @media (max-width: 900px) {
-  .hamburger {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 25px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 1001;
-  }
-  .hamburger span {
-    width: 30px;
-    height: 3px;
-    background-color: white;
-    border-radius: 10px;
-    transition: all 0.3s linear;
-  }
   .main-header {
-      padding: 0 1rem;
+    height: auto;
+    padding: 1rem;
   }
   .main-nav {
-    display: none;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background-color: #1e272e;
     flex-direction: column;
-    padding: 2rem 0;
-    border-top: 1px solid #333;
-  }
-  .main-nav.active {
-    display: flex;
+    align-items: center;
+    gap: 1.5rem;
   }
   .nav-group-left, .nav-group-right {
     flex-direction: column;
+    align-items: center;
     gap: 1.5rem;
+    width: 100%;
   }
   #auth-buttons {
+    order: -1; /* Pone los botones de login/usuario primero */
     flex-direction: column;
-    gap: 1.5rem;
+    align-items: center;
+    gap: 1rem;
+  }
+  .user-email {
     order: -1;
   }
-  .container { padding: 0 1rem; margin: 1rem auto; }
-  .novel-hub-header, .novel-page { flex-direction: column; }
+  .novel-hub-header, .novel-page {
+    flex-direction: column;
+  }
+  .container {
+      padding: 0 1rem;
+      margin: 1rem auto;
+  }
+}
+/* --- Estilos Chatbot de Lore --- */
+#lore-chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+#open-chatbot-btn {
+  background-color: #00a8ff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s;
+}
+#open-chatbot-btn:hover {
+  transform: scale(1.1);
+}
+#chatbot-window {
+  width: 350px;
+  max-height: 500px;
+  background-color: #1e272e;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #333;
+}
+#chatbot-window.hidden {
+  display: none;
+}
+#chatbot-header {
+  background-color: #333;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+#chatbot-header h3 {
+  margin: 0;
+  font-size: 1em;
+}
+#close-chatbot-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+#chatbot-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.message {
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 80%;
+  line-height: 1.4;
+}
+.message.user {
+  background-color: #00a8ff;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+}
+.message.bot {
+  background-color: #333;
+  color: #eee;
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+}
+#chatbot-input-container {
+  display: flex;
+  border-top: 1px solid #333;
+}
+#chatbot-input {
+  flex-grow: 1;
+  border: none;
+  padding: 15px;
+  background-color: #12181b;
+  color: white;
+}
+#chatbot-input:focus {
+  outline: none;
+}
+#send-chatbot-btn {
+  background-color: #00a8ff;
+  border: none;
+  color: white;
+  padding: 0 20px;
+  cursor: pointer;
+}
+/* --- Estilos Buscador de Historias --- */
+.story-finder-section {
+  background-color: #1e272e;
+  border: 1px solid #333;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.story-finder-section h2 {
+  margin-top: 0;
+  font-size: 1.8em;
+  color: #00a8ff;
+}
+.finder-input-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+#story-finder-input {
+  flex-grow: 1;
+  padding: 15px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #12181b;
+  color: #eee;
+  font-size: 1em;
+}
+#story-finder-btn {
+  padding: 0 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: #00a8ff;
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+#story-finder-btn:hover {
+  background-color: #0095e0;
+}
+#story-finder-response {
+  margin-top: 1.5rem;
+  text-align: left;
+  background-color: #12181b;
+  padding: 1.5rem;
+  border-radius: 5px;
+  min-height: 50px;
+}
+#story-finder-response a {
+    color: #00a8ff;
+    font-weight: bold;
 }
