@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Biblioteca - PechsNovel</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2c3e50">
+</head>
+<body>
+  <header class="main-header">
+    <h1><a href="/">PechsNovel</a></h1>
+    <nav>
+      <a href="/">Inicio</a>
+      <a href="/generos/">Géneros</a>
+      <div id="auth-buttons"></div>
+      <a href="/admin/">Publicar</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2 class="page-title">Mi Biblioteca</h2>
+    <div id="library-content">
+      <p>Cargando tus novelas guardadas...</p>
+    </div>
+  </main>
+
+  <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="/auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const identity = window.netlifyIdentity;
+      const libraryContent = document.getElementById('library-content');
+
+      function loadLibrary() {
+        const user = identity.currentUser();
+        if (!user) {
+          libraryContent.innerHTML = '<p>Por favor, inicia sesión para ver tu biblioteca.</p>';
+          return;
+        }
+
+        // 1. Llama a nuestra nueva función para obtener los slugs de la biblioteca
+        fetch('/.netlify/functions/getLibrary', {
+          method: 'POST',
+          body: JSON.stringify({ user_id: user.id })
+        })
+        .then(res => res.json())
+        .then(savedNovels => {
+          // 2. Carga el "catálogo" completo de novelas
+          fetch('/novels.json')
+          .then(res => res.json())
+          .then(allNovels => {
+            const savedSlugs = savedNovels.map(n => n.novel_slug);
+            const libraryNovels = allNovels.filter(n => savedSlugs.includes(n.slug));
+
+            if (libraryNovels.length === 0) {
+              libraryContent.innerHTML = '<p>Aún no has añadido ninguna novela a tu biblioteca.</p>';
+              return;
+            }
+
+            // 3. Muestra las novelas guardadas en una cuadrícula
+            let html = '<div class="novel-grid">';
+            libraryNovels.forEach(novel => {
+              html += `
+                <a href="${novel.url}" class="novel-card-link">
+                  <div class="novel-card">
+                    <img src="${novel.cover_image}" alt="Portada de ${novel.title}">
+                    <h3>${novel.title}</h3>
+                  </div>
+                </a>
+              `;
+            });
+            html += '</div>';
+            libraryContent.innerHTML = html;
+          });
+        })
+        .catch(err => {
+          libraryContent.innerHTML = '<p>Hubo un error al cargar tu biblioteca.</p>';
+          console.error(err);
+        });
+      }
+
+      identity.on('login', loadLibrary);
+      identity.on('logout', () => {
+        libraryContent.innerHTML = '<p>Por favor, inicia sesión para ver tu biblioteca.</p>';
+      });
+
+      loadLibrary();
+    });
+  </script>
+</body>
+</html>
