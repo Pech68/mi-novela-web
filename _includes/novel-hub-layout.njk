@@ -35,7 +35,20 @@
         <p><strong>Estado:</strong> {{ status }}</p>
         <div class="novel-hub-actions">
           <button id="add-to-library-btn" class="action-btn primary" style="display: none;">Añadir a la Biblioteca</button>
-          <button class="action-btn">Leer Primer Capítulo</button>
+         {% set novelSlug = page.fileSlug %}
+            {% set chaptersForThisNovel = collections.chapter | sort(false, false, 'fileSlug') %}
+            {% set firstChapter = false %}
+            {% for chapter in chaptersForThisNovel %}
+                {% if chapter.data.novel == novelSlug %}
+                    {% if not firstChapter %}{% set firstChapter = chapter %}{% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if firstChapter %}
+                <a href="{{ firstChapter.url }}" class="action-btn">Leer Primer Capítulo</a>
+            {% else %}
+                <button class="action-btn" disabled>No hay capítulos</button>
+            {% endif %}
         </div>
       </div>
     </div>
