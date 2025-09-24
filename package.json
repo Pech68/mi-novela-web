@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Dependencies for Netlify Functions",
   "dependencies": {
-    "@supabase/supabase-js": "^2.38.4"
+    "@supabase/supabase-js": "^2.38.4",
+    "@google/generative-ai": "^0.14.1"
   }
 }
