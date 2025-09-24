@@ -63,33 +63,3 @@
       </div>
     </aside>
   </main>
-  
-  <section class="container comments-section">
-    <h2>Comentarios</h2>
-    <div id="disqus_thread"></div>
-    <script>
-        var disqus_config = function () {
-            this.page.url = '{{ site.url }}{{ page.url }}';
-            this.page.identifier = '{{ page.url }}';
-        };
-        (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://pechsnovel.disqus.com/embed.js'; // Tu shortname ya está aquí
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>Por favor, activa JavaScript para ver los <a href="https://disqus.com/?ref_noscript">comentarios potenciados por Disqus.</a></noscript>
-  </section>
-
-  <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script src="/auth.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js');
-      });
-    }
-  </script>
-</body>
-</html>
