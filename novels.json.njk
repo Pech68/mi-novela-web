@@ -4,10 +4,12 @@ permalink: /novels.json
 [
   {%- for novel in collections.novel %}
   {
-    "title": "{{ novel.data.title }}",
+    "title": {{ novel.data.title | dump | safe }},
     "url": "{{ novel.url }}",
     "slug": "{{ novel.fileSlug }}",
-    "cover_image": "{{ novel.data.cover_image }}"
+    "cover_image": "{{ novel.data.cover_image }}",
+    "description": {{ novel.data.description | dump | safe }},
+    "chapter_count": {% set novelSlug = novel.fileSlug %}{{ collections.chapter | filterByNovel(novelSlug) | length }}
   }
   {%- if not loop.last %},{% endif %}
   {%- endfor %}
