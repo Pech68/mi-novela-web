@@ -10,7 +10,8 @@ permalink: "/lore/{{ novel.fileSlug }}.json"
   "author": {{ novel.data.author | dump | safe }},
   "content": [
     {%- set novelSlug = novel.fileSlug %}
-    {%- set chaptersForThisNovel = collections.chapter | filter(item => item.data.novel === novelSlug) | sort(false, false, 'fileSlug') %}
+    {# Usamos nuestro nuevo filtro, que es más limpio y funciona #}
+    {%- set chaptersForThisNovel = collections.chapter | filterByNovel(novelSlug) | sort(false, false, 'fileSlug') %}
     {%- for chapter in chaptersForThisNovel %}
       {{- chapter.templateContent | dump | safe -}}{%- if not loop.last %},{% endif %}
     {%- endfor %}
