@@ -31,24 +31,30 @@
       <div class="novel-hub-info">
         <h1>{{ title }}</h1>
         <p><strong>Autor:</strong> {{ author }}</p>
-        <p><strong>Géneros:</strong> {{ genres }}</p>
+        <p><strong>Géneros:</strong> 
+          {% set genreList = genres.split(',') %}
+          {% for genre in genreList %}
+            <a href="/generos/{{ genre | trim | slugify }}/" class="genre-tag">{{ genre | trim }}</a>
+          {% endfor %}
+        </p>
         <p><strong>Estado:</strong> {{ status }}</p>
         <div class="novel-hub-actions">
           <button id="add-to-library-btn" class="action-btn primary" style="display: none;">Añadir a la Biblioteca</button>
-         {% set novelSlug = page.fileSlug %}
-            {% set chaptersForThisNovel = collections.chapter | sort(false, false, 'fileSlug') %}
-            {% set firstChapter = false %}
-            {% for chapter in chaptersForThisNovel %}
-                {% if chapter.data.novel == novelSlug %}
-                    {% if not firstChapter %}{% set firstChapter = chapter %}{% endif %}
-                {% endif %}
-            {% endfor %}
+          
+          {% set novelSlug = page.fileSlug %}
+          {% set chaptersForThisNovel = collections.chapter | sort(false, false, 'fileSlug') %}
+          {% set firstChapter = false %}
+          {% for chapter in chaptersForThisNovel %}
+              {% if chapter.data.novel == novelSlug %}
+                  {% if not firstChapter %}{% set firstChapter = chapter %}{% endif %}
+              {% endif %}
+          {% endfor %}
 
-            {% if firstChapter %}
-                <a href="{{ firstChapter.url }}" class="action-btn">Leer Primer Capítulo</a>
-            {% else %}
-                <button class="action-btn" disabled>No hay capítulos</button>
-            {% endif %}
+          {% if firstChapter %}
+              <a href="{{ firstChapter.url }}" class="action-btn">Leer Primer Capítulo</a>
+          {% else %}
+              <button class="action-btn" disabled>No hay capítulos</button>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -77,50 +83,72 @@
     document.addEventListener("DOMContentLoaded", function() {
       const identity = window.netlifyIdentity;
       const addToLibraryBtn = document.getElementById('add-to-library-btn');
+      const novelSlug = '{{ page.fileSlug }}';
 
-      function checkUser() {
+      async function updateLibraryButtonStatus() {
         const user = identity.currentUser();
-        if (user && addToLibraryBtn) {
-          addToLibraryBtn.style.display = 'inline-block'; // Muestra el botón si el usuario está logueado
-        } else if (addToLibraryBtn) {
-          addToLibraryBtn.style.display = 'none'; // Oculta el botón si no está logueado
+        if (!user || !addToLibraryBtn) {
+          if(addToLibraryBtn) addToLibraryBtn.style.display = 'none';
+          return;
+        }
+        addToLibraryBtn.style.display = 'inline-block';
+
+        try {
+          const response = await fetch('/.netlify/functions/checkLibraryStatus', {
+            method: 'POST',
+            body: JSON.stringify({ user_id: user.id, novel_slug: novelSlug })
+          });
+          const data = await response.json();
+
+          if (data.isInLibrary) {
+            addToLibraryBtn.innerText = 'En tu Biblioteca';
+            addToLibraryBtn.disabled = true;
+          } else {
+            addToLibraryBtn.innerText = 'Añadir a la Biblioteca';
+            addToLibraryBtn.disabled = false;
+          }
+        } catch (error) {
+          console.error('Error al verificar biblioteca:', error);
+          addToLibraryBtn.innerText = 'Error al verificar';
+          addToLibraryBtn.disabled = true;
         }
       }
 
-      checkUser(); // Revisa al cargar la página
-      identity.on('login', checkUser);
-      identity.on('logout', checkUser);
+      identity.on('login', updateLibraryButtonStatus);
+      identity.on('logout', () => {
+        if(addToLibraryBtn) {
+            addToLibraryBtn.style.display = 'none';
+        }
+      });
+      identity.on('init', updateLibraryButtonStatus);
 
       if (addToLibraryBtn) {
-        addToLibraryBtn.addEventListener('click', function() {
+        addToLibraryBtn.addEventListener('click', async function() {
           const user = identity.currentUser();
-          if (!user) {
-            alert('Por favor, inicia sesión para añadir esta novela a tu biblioteca.');
-            return;
-          }
+          if (!user || addToLibraryBtn.disabled) return;
 
-          const dataToSend = {
-            user_id: user.id,
-            novel_slug: '{{ page.fileSlug }}'
-          };
+          addToLibraryBtn.innerText = 'Guardando...';
+          addToLibraryBtn.disabled = true;
 
-          // Llamada a nuestra Netlify Function
-          fetch('/.netlify/functions/addToLibrary', {
-            method: 'POST',
-            body: JSON.stringify(dataToSend)
-          })
-          .then(response => response.json())
-          .then(data => {
+          try {
+            const response = await fetch('/.netlify/functions/addToLibrary', {
+              method: 'POST',
+              body: JSON.stringify({ user_id: user.id, novel_slug: novelSlug })
+            });
+            const data = await response.json();
+
             if (data.error) {
               alert('Error: ' + data.error);
+              updateLibraryButtonStatus(); // Revertir si hay error
             } else {
-              alert(data.message);
+              alert('¡Novela añadida a la biblioteca!');
+              addToLibraryBtn.innerText = 'En tu Biblioteca'; // Actualiza inmediatamente
             }
-          })
-          .catch(error => {
+          } catch (error) {
             console.error('Error:', error);
             alert('Hubo un error al conectar con el servidor.');
-          });
+            updateLibraryButtonStatus(); // Revertir si hay error
+          }
         });
       }
     });
