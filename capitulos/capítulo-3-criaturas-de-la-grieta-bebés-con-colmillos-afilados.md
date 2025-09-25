@@ -1,6 +1,7 @@
 ---
 novel: maestro-del-fin-de-los-tiempos
 title: "Capítulo 3: Criaturas de la Grieta: Bebés con Colmillos Afilados"
+chapter_number: 3
 layout: chapter-layout.njk
 tags: chapter
 ---
