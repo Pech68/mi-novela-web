@@ -1,6 +1,7 @@
 ---
 novel: maestro-del-fin-de-los-tiempos
 title: "Capítulo 2: Dispositivo estabilizador espacial"
+chapter_number: 2
 layout: chapter-layout.njk
 tags: chapter
 ---
