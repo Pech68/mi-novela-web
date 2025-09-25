@@ -1,6 +1,7 @@
 ---
 novel: maestro-del-fin-de-los-tiempos
 title: "Capítulo 4: Comerciante especulador en la capital imperial"
+chapter_number: 4
 layout: chapter-layout.njk
 tags: chapter
 ---
