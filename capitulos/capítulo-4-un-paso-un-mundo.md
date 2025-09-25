@@ -1,6 +1,7 @@
 ---
 novel: crónicas-del-origen-el-despertar-del-polvo-cósmico-capítulo-1-el-sueño-del-soberano-y-el-lamento-del-dragón
 title: "Capítulo 4: Un Paso, Un Mundo"
+chapter_number: 4
 layout: chapter-layout.njk
 tags: chapter
 ---
