@@ -1,6 +1,7 @@
 ---
 novel: sigue-el-camino-del-dao-desde-la-infancia
 title: " Capítulo 5: El Último"
+chapter_number: 5
 layout: chapter-layout.njk
 tags: chapter
 ---
