@@ -1,6 +1,7 @@
 ---
 novel: maestro-del-fin-de-los-tiempos
 title: "Capítulo 1: Una década antes del renacimiento"
+chapter_number: 1
 layout: chapter-layout.njk
 tags: chapter
 ---
