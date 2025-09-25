@@ -1,6 +1,7 @@
 ---
 novel: sigue-el-camino-del-dao-desde-la-infancia
 title: "Capítulo 6: Las Tres Tierras Sagradas"
+chapter_number: 6
 layout: chapter-layout.njk
 tags: chapter
 ---
