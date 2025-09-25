@@ -1,6 +1,7 @@
 ---
 novel: maestro-del-fin-de-los-tiempos
 title: "Capítulo 6: Los hombres rana de Reed Marsh"
+chapter_number: 6
 layout: chapter-layout.njk
 tags: chapter
 ---
