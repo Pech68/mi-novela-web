@@ -22,7 +22,8 @@ exports.handler = async function(event, context) {
     const catalogAsString = JSON.stringify(catalog, null, 2);
 
     // 2. Prepara el prompt para la IA
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    // ===== LÍNEA CORREGIDA AQUÍ =====
+    const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
     const prompt = `Eres "El Bibliotecario", un asistente de IA para el sitio de novelas PechsNovel. Tu misión es ayudar a los lectores a descubrir historias y responder preguntas sobre el contenido del sitio.
 
     BASA TUS RESPUESTAS ÚNICA Y EXCLUSIVAMENTE EN EL SIGUIENTE CATÁLOGO DE NOVELAS:
