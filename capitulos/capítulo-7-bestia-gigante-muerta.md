@@ -1,6 +1,7 @@
 ---
 novel: maestro-del-fin-de-los-tiempos
 title: "Capítulo 7: Bestia gigante muerta"
+chapter_number: 7
 layout: chapter-layout.njk
 tags: chapter
 ---
