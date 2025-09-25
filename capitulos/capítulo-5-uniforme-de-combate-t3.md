@@ -1,6 +1,7 @@
 ---
 novel: maestro-del-fin-de-los-tiempos
 title: "Capítulo 5: Uniforme de combate T3"
+chapter_number: 5
 layout: chapter-layout.njk
 tags: chapter
 ---
