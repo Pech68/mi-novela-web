@@ -1,6 +1,7 @@
 ---
 novel: crónicas-del-origen-el-despertar-del-polvo-cósmico-capítulo-1-el-sueño-del-soberano-y-el-lamento-del-dragón
 title: "Capítulo 2: El Sutra del Universo en un Grano de Arena"
+chapter_number: 2
 layout: chapter-layout.njk
 tags: chapter
 ---
