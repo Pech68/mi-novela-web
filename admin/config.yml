@@ -13,15 +13,18 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Título de la Novela", name: "title", widget: "string"}
-      - {label: "Autor", name: "author", widget: "string", default: "Alex Chen"}
-      - {label: "Imagen de Portada", name: "cover_image", widget: "image"}
-      - {label: "Sinopsis / Resumen", name: "description", widget: "markdown"}
-      - {label: "Géneros (separados por comas)", name: "genres", widget: "string", default: "Fantasía, Aventura"}
-      - {label: "Estado (En emision, Finalizada, etc.)", name: "status", widget: "string", default: "En emision"}
-      - {label: "Layout", name: "layout", widget: "hidden", default: "novel-hub-layout.njk"}
-      - {label: "Tags", name: "tags", widget: "hidden", default: "novel"}
-
+      - label: "Novela a la que Pertenece"
+        name: "novel"
+        widget: "relation"
+        collection: "novelas"
+        search_fields: ["title"]
+        value_field: "{{slug}}"
+        display_fields: ["title"]
+      - {label: "Título del Capítulo (ej. Capítulo 1: El Despertar)", name: "title", widget: "string"}
+      - {label: "Número del Capítulo (para ordenar)", name: "chapter_number", widget: "number", min: 1} # <-- CAMPO NUEVO
+      - {label: "Contenido del Capítulo", name: "body", widget: "markdown"}
+      - {label: "Layout", name: "layout", widget: "hidden", default: "chapter-layout.njk"}
+      - {label: "Tags", name: "tags", widget: "hidden", default: "chapter"}
   # Colección para cada CAPÍTULO individual
   - name: "capitulos"
     label: "Capítulos"
