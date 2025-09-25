@@ -1,6 +1,7 @@
 ---
 novel: maestro-del-fin-de-los-tiempos
 title: "Capítulo 10: Destruye al General Bestia"
+chapter_number: 10
 layout: chapter-layout.njk
 tags: chapter
 ---
