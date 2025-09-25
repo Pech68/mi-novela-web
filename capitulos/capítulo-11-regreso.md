@@ -1,6 +1,7 @@
 ---
 novel: maestro-del-fin-de-los-tiempos
 title: "Capítulo 11: Regreso"
+chapter_number: 11
 layout: chapter-layout.njk
 tags: chapter
 ---
