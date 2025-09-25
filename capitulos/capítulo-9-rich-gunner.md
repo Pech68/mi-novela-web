@@ -1,6 +1,7 @@
 ---
 novel: maestro-del-fin-de-los-tiempos
 title: "Capítulo 9: Rich Gunner"
+chapter_number: 9
 layout: chapter-layout.njk
 tags: chapter
 ---
