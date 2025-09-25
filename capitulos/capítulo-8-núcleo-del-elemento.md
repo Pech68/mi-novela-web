@@ -1,6 +1,7 @@
 ---
 novel: maestro-del-fin-de-los-tiempos
 title: "Capítulo 8: Núcleo del elemento"
+chapter_number: 8
 layout: chapter-layout.njk
 tags: chapter
 ---
