@@ -1,6 +1,6 @@
 ---
 novel: sigue-el-camino-del-dao-desde-la-infancia
-title: Capítulo 2 Recopilación de esgrima
+title: "Capítulo 2: Recopilación de esgrima"
 layout: chapter-layout.njk
 tags: chapter
 ---
