@@ -1,6 +1,6 @@
 ---
 novel: sigue-el-camino-del-dao-desde-la-infancia
-title: Capítulo 4 Niveles tres, seis y nueve
+title: "Capítulo 4: Niveles tres, seis y nueve"
 layout: chapter-layout.njk
 tags: chapter
 ---
