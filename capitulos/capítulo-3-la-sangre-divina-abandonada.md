@@ -1,6 +1,7 @@
 ---
 novel: sigue-el-camino-del-dao-desde-la-infancia
 title: "Capítulo 3: La Sangre Divina Abandonada"
+chapter_number: 3
 layout: chapter-layout.njk
 tags: chapter
 ---
