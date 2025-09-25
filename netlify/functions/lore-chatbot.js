@@ -21,7 +21,7 @@ exports.handler = async function(event, context) {
     const knowledgeAsString = JSON.stringify(knowledgeBase.chapters, null, 2);
 
     // 2. Prepara el NUEVO Y MÁS PODEROSO prompt para la IA
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = `Eres un asistente de IA experto y conversacional para el sitio de novelas PechsNovel. Estás especializado en la novela "${knowledgeBase.title}" de ${knowledgeBase.author}.
 
     HAS RECIBIDO EL CONTENIDO COMPLETO DE LA NOVELA, ESTRUCTURADO POR CAPÍTULOS, A CONTINUACIÓN:
