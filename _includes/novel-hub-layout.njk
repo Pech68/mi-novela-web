@@ -70,13 +70,12 @@
       <h2>Lista de Capítulos</h2>
       <ul class="chapter-list">
         {% set novelSlug = page.fileSlug %}
-        {% set chaptersForThisNovel = collections.chapter | reverse %}
+        {# Filtramos los capítulos de esta novela Y los ordenamos por el nuevo campo numérico #}
+        {% set chaptersForThisNovel = collections.chapter | filterByNovel(novelSlug) | sort(false, false, 'data.chapter_number') %}
         {% for chapter in chaptersForThisNovel %}
-          {% if chapter.data.novel == novelSlug %}
-            <li>
-              <a href="{{ chapter.url }}">{{ chapter.data.title }}</a>
-            </li>
-          {% endif %}
+          <li>
+            <a href="{{ chapter.url }}">{{ chapter.data.title }}</a>
+          </li>
         {% endfor %}
       </ul>
     </div>
