@@ -1,6 +1,7 @@
 ---
 novel: crónicas-del-origen-el-despertar-del-polvo-cósmico-capítulo-1-el-sueño-del-soberano-y-el-lamento-del-dragón
 title: "Capítulo 3: El Corazón de la Llama y la Sombra del Dragón"
+chapter_number: 3
 layout: chapter-layout.njk
 tags: chapter
 ---
