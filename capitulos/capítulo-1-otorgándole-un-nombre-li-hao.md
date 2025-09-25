@@ -1,6 +1,7 @@
 ---
 novel: sigue-el-camino-del-dao-desde-la-infancia
 title: "Capítulo 1: Otorgándole un nombre, Li Hao"
+chapter_number: 1
 layout: chapter-layout.njk
 tags: chapter
 ---
