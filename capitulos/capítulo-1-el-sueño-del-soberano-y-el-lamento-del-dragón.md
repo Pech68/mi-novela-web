@@ -1,6 +1,7 @@
 ---
 novel: crónicas-del-origen-el-despertar-del-polvo-cósmico-capítulo-1-el-sueño-del-soberano-y-el-lamento-del-dragón
 title: "Capítulo 1: El Sueño del Soberano y el Lamento del Dragón"
+chapter_number: 1
 layout: chapter-layout.njk
 tags: chapter
 ---
