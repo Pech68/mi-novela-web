@@ -487,3 +487,11 @@ body {
   .novel-hub-header, .novel-page { flex-direction: column; }
   .main-header { padding: 0 1.5rem; }
 }
+/* --- Estilo para el botón cuando la novela está en la biblioteca --- */
+.action-btn.in-library {
+  background-color: #27ae60; /* Un color verde de "éxito" */
+  cursor: pointer; /* Lo mantenemos clicable para poder retirarla */
+}
+.action-btn.in-library:hover {
+  background-color: #2ecc71;
+}
