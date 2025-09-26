@@ -11,12 +11,12 @@
 <body>
   <header class="main-header">
     <h1><a href="/">PechsNovel</a></h1>
-<button id="hamburger-btn" class="hamburger" aria-label="Abrir menú">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
-   <nav id="mobile-nav" class="main-nav">
+    <button id="hamburger-btn" class="hamburger" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav id="mobile-nav" class="main-nav">
       <div class="nav-group-left">
         <a href="/">Inicio</a>
         <a href="/generos/">Géneros</a>
@@ -68,9 +68,8 @@
       <h2>Resumen</h2>
       <div>{{ description | safe }}</div>
       <h2>Lista de Capítulos</h2>
-      <ul class="chapter-list">
+      <ul id="chapter-list-paginated" class="chapter-list">
         {% set novelSlug = page.fileSlug %}
-        {# Filtramos los capítulos de esta novela Y los ordenamos por el nuevo campo numérico #}
         {% set chaptersForThisNovel = collections.chapter | filterByNovel(novelSlug) | sort(false, false, 'data.chapter_number') %}
         {% for chapter in chaptersForThisNovel %}
           <li>
@@ -78,11 +77,21 @@
           </li>
         {% endfor %}
       </ul>
+      <div id="pagination-controls-top" class="pagination-controls"></div>
+      <div id="pagination-controls-bottom" class="pagination-controls"></div>
     </div>
   </main>
 
   <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script src="/auth.js"></script>
+  <script src="/nav.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const identity = window.netlifyIdentity;
@@ -157,24 +166,46 @@
       }
     });
   </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const chaptersPerPage = 50;
+      const list = document.getElementById('chapter-list-paginated');
+      if (!list) return;
+      const items = Array.from(list.getElementsByTagName('li'));
+      if (items.length <= chaptersPerPage) return;
+      const totalPages = Math.ceil(items.length / chaptersPerPage);
 
-  <div id="lore-chatbot-container">
-    <div id="chatbot-window" class="hidden">
-      <div id="chatbot-header">
-        <h3>Pregúntale al Experto</h3>
-        <button id="close-chatbot-btn">&times;</button>
-      </div>
-      <div id="chatbot-messages">
-        <div class="message bot">¡Hola! Soy un experto en esta novela. ¿Qué te gustaría saber sobre su universo?</div>
-      </div>
-      <div id="chatbot-input-container">
-        <input type="text" id="chatbot-input" placeholder="Escribe tu pregunta...">
-        <button id="send-chatbot-btn">Enviar</button>
-      </div>
-    </div>
-    <button id="open-chatbot-btn">
-      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M480-120q-151 0-255.5-104.5T120-480q0-151 104.5-255.5T480-840q42 0 79.5 8t71.5 22l-42 42q-25-10-54-10-125 0-212.5 87.5T200-480q0 125 87.5 212.5T480-80q29 0 57.5-8.5T586-108l42 42q-36 19-75 26t-73 7Zm260-140-42-42q11-26 16-53.5T720-418q0-125-87.5-212.5T420-718q-29 0-56 7.5T314-692l-42-42q36-19 75.5-27t80.5-8q151 0 255.5 104.5T800-480q0 44-9 82.5T764-322l42 42q16-41 24.5-86T840-480q0-151-104.5-255.5T480-840q-43 0-82 9t-76 25l-42-42q41-19 85-28t89-9q183 0 311.5 128.5T920-480q0 47-9.5 90.5T884-302l-144 142ZM220-60l44-110-114-46 122-80-40-118 108 60 60-108 40 118 122 80-114 46 44 110-108-60-60 108Z"/></svg>
-    </button>
-  </div>
-  </body>
+      function createPaginationControls(containerId) { /* ... (código sin cambios) ... */ }
+      function showPage(pageNumber) { /* ... (código sin cambios) ... */ }
+      
+      createPaginationControls('pagination-controls-top');
+      createPaginationControls('pagination-controls-bottom');
+      showPage(1);
+
+      // --- Pegamos las funciones completas para asegurar ---
+      function createPaginationControls(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        for (let i = 1; i <= totalPages; i++) {
+          const pageBtn = document.createElement('button');
+          pageBtn.classList.add('page-btn');
+          pageBtn.innerText = i;
+          pageBtn.addEventListener('click', function() { showPage(i); });
+          container.appendChild(pageBtn);
+        }
+      }
+      function showPage(pageNumber) {
+        const startIndex = (pageNumber - 1) * chaptersPerPage;
+        const endIndex = startIndex + chaptersPerPage;
+        items.forEach((item, index) => {
+          item.style.display = (index >= startIndex && index < endIndex) ? 'block' : 'none';
+        });
+        document.querySelectorAll(`#${list.id} ~ .pagination-controls .page-btn`).forEach(btn => {
+          btn.classList.toggle('active', parseInt(btn.innerText) === pageNumber);
+        });
+        list.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  </script>
+</body>
 </html>
