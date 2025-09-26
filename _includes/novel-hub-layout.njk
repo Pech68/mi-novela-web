@@ -92,80 +92,84 @@
       });
     }
   </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const identity = window.netlifyIdentity;
-      const addToLibraryBtn = document.getElementById('add-to-library-btn');
-      const novelSlug = '{{ page.fileSlug }}';
+ <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const identity = window.netlifyIdentity;
+    const addToLibraryBtn = document.getElementById('add-to-library-btn');
+    const novelSlug = '{{ page.fileSlug }}';
 
-      async function updateLibraryButtonStatus() {
-        const user = identity.currentUser();
-        if (!user || !addToLibraryBtn) {
-          if(addToLibraryBtn) addToLibraryBtn.style.display = 'none';
-          return;
+    // Esta variable guardará el estado actual para saber si debemos añadir o eliminar
+    let isInLibrary = false;
+
+    async function updateLibraryButtonStatus() {
+      const user = identity.currentUser();
+      if (!user || !addToLibraryBtn) {
+        if(addToLibraryBtn) addToLibraryBtn.style.display = 'none';
+        return;
+      }
+      addToLibraryBtn.style.display = 'inline-block';
+
+      try {
+        const response = await fetch('/.netlify/functions/checkLibraryStatus', {
+          method: 'POST',
+          body: JSON.stringify({ user_id: user.id, novel_slug: novelSlug })
+        });
+        const data = await response.json();
+
+        if (data.isInLibrary) {
+          addToLibraryBtn.innerText = 'En tu Biblioteca';
+          addToLibraryBtn.classList.add('in-library'); // Clase para cambiar el estilo
+          isInLibrary = true;
+        } else {
+          addToLibraryBtn.innerText = 'Añadir a la Biblioteca';
+          addToLibraryBtn.classList.remove('in-library');
+          isInLibrary = false;
         }
-        addToLibraryBtn.style.display = 'inline-block';
+        addToLibraryBtn.disabled = false;
+      } catch (error) {
+        addToLibraryBtn.innerText = 'Error al verificar';
+        addToLibraryBtn.disabled = true;
+      }
+    }
+
+    identity.on('login', updateLibraryButtonStatus);
+    identity.on('logout', () => { if(addToLibraryBtn) addToLibraryBtn.style.display = 'none'; });
+    identity.on('init', updateLibraryButtonStatus);
+
+    if (addToLibraryBtn) {
+      addToLibraryBtn.addEventListener('click', async function() {
+        const user = identity.currentUser();
+        if (!user) return;
+
+        addToLibraryBtn.disabled = true;
+
+        // Decide qué función llamar basado en el estado actual
+        const endpoint = isInLibrary ? '/.netlify/functions/removeFromLibrary' : '/.netlify/functions/addToLibrary';
+
+        addToLibraryBtn.innerText = 'Actualizando...';
 
         try {
-          const response = await fetch('/.netlify/functions/checkLibraryStatus', {
+          const response = await fetch(endpoint, {
             method: 'POST',
             body: JSON.stringify({ user_id: user.id, novel_slug: novelSlug })
           });
           const data = await response.json();
 
-          if (data.isInLibrary) {
-            addToLibraryBtn.innerText = 'En tu Biblioteca';
-            addToLibraryBtn.disabled = true;
+          if (data.error) {
+            alert('Error: ' + data.error);
           } else {
-            addToLibraryBtn.innerText = 'Añadir a la Biblioteca';
-            addToLibraryBtn.disabled = false;
+            alert(data.message);
           }
         } catch (error) {
-          console.error('Error al verificar biblioteca:', error);
-          addToLibraryBtn.innerText = 'Error al verificar';
-          addToLibraryBtn.disabled = true;
-        }
-      }
-
-      identity.on('login', updateLibraryButtonStatus);
-      identity.on('logout', () => {
-        if(addToLibraryBtn) {
-            addToLibraryBtn.style.display = 'none';
+          alert('Hubo un error al conectar con el servidor.');
+        } finally {
+          // Vuelve a verificar el estado para actualizar el botón correctamente
+          updateLibraryButtonStatus();
         }
       });
-      identity.on('init', updateLibraryButtonStatus);
-
-      if (addToLibraryBtn) {
-        addToLibraryBtn.addEventListener('click', async function() {
-          const user = identity.currentUser();
-          if (!user || addToLibraryBtn.disabled) return;
-
-          addToLibraryBtn.innerText = 'Guardando...';
-          addToLibraryBtn.disabled = true;
-
-          try {
-            const response = await fetch('/.netlify/functions/addToLibrary', {
-              method: 'POST',
-              body: JSON.stringify({ user_id: user.id, novel_slug: novelSlug })
-            });
-            const data = await response.json();
-
-            if (data.error) {
-              alert('Error: ' + data.error);
-              updateLibraryButtonStatus();
-            } else {
-              alert('¡Novela añadida a la biblioteca!');
-              addToLibraryBtn.innerText = 'En tu Biblioteca';
-            }
-          } catch (error) {
-            console.error('Error:', error);
-            alert('Hubo un error al conectar con el servidor.');
-            updateLibraryButtonStatus();
-          }
-        });
-      }
-    });
-  </script>
+    }
+  });
+</script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const chaptersPerPage = 50;
